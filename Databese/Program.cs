@@ -5,13 +5,14 @@ namespace Database
 {
     public class Program
     {
+
         static void Main(string[] args)
         {
             Console.WriteLine("Conectando a la base de datos");
             Db database = new Db();
-            database.Conectar();
+            Db.Conectar();
 
-            if (database.EstaLaConexionAbierta())
+            if (Db.EstaLaConexionAbierta())
             {
                 Usuario nuevoUsuario = new Usuario() //se ejecuta una vez
                 {
@@ -27,20 +28,20 @@ namespace Database
                     deleted = false,
                     isAdmin = false,
                 };
-                database.intercambioUsuario(nuevoUsuario); //crear usuario
+                Db.intercambioUsuario(nuevoUsuario); //crear usuario
                 //  si quieres borrar comento esta y listo
                 Console.WriteLine("Nuevo Usuario ingresado, pulsa una tecla para continuar");
                 Console.ReadKey();
 
                 nuevoUsuario.firstName += " modificado!!";
-                database.Actualizar(nuevoUsuario);
+                Db.Actualizar(nuevoUsuario);
                 Console.WriteLine("Usuario Actualizado");
                 Console.ReadKey();
 
-                database.EliminarUsuario("aa2vsasa@kk.com"); //aqui se pone el hiddenId que lo quiera borrar
+                Db.EliminarUsuario("aa2vsasa@kk.com"); //aqui se pone el hiddenId que lo quiera borrar
                 Console.WriteLine("Usuario Borrado pulse una tecla para continuar");
                 Console.ReadKey();
-                List <Usuario> listaUsuarios = database.DameLosUsuarios();
+                List<Usuario> listaUsuarios = Db.DameLosUsuarios();
                 listaUsuarios.ForEach(usuario =>
                 {
                     Console.WriteLine(
@@ -60,8 +61,8 @@ namespace Database
                             );
                 });
             }
-            database.Desconectar();
-            database = null;
+            Db.Desconectar();
+
             Console.ReadKey();
         }
 

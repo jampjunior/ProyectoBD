@@ -8,7 +8,7 @@ namespace Database
 {
     public class Db
     {
-        private SqlConnection conexion = null;
+        private static SqlConnection conexion = null;
 
         public void Conectar()
         {
@@ -68,18 +68,18 @@ namespace Database
             return conexion.State == ConnectionState.Open;
         }
 
-        public void Desconectar()
+        public static void Desconectar()
         {
-            if (this.conexion != null)
+            if (conexion != null)
             {
-                if (this.conexion.State != ConnectionState.Closed)
+                if (conexion.State != ConnectionState.Closed)
                 {
-                    this.conexion.Close();
+                    conexion.Close();
                 }
             }
         }
 
-        public List<Usuario> DameLosUsuarios()
+        public static List<Usuario> DameLosUsuarios()
         {
             //Usuario[]     usuarios = null;
             List<Usuario> usuarios = null;
@@ -115,7 +115,7 @@ namespace Database
         }
 
 
-        public void intercambioUsuario(Usuario usuario)// nombre que se le pone a elegir para ponerlo luego abajo
+        public static void intercambioUsuario(Usuario usuario)// nombre que se le pone a elegir para ponerlo luego abajo
         {
             // PREPARO LA CONSULTA SQL PARA INSERTAR AL NUEVO USUARIO
             string consultaSQL = @"INSERT INTO Users (
@@ -153,7 +153,7 @@ namespace Database
         }
 
        
-        public void EliminarUsuario (string email){
+        public static void EliminarUsuario (string email){
 
         
             string consultaSQL = @"DELETE FROM Users WHERE email ='" + email + "';"; //pasa el identificador que se quiera borrar
@@ -165,7 +165,7 @@ namespace Database
 
         }
 
-        public void Actualizar(Usuario usuario) {
+        public static void Actualizar(Usuario usuario) {
             string consultaSQL= @"UPDATE Users";
    
              
