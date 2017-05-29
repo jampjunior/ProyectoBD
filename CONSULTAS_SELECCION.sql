@@ -59,3 +59,8 @@ SELECT count(*), deleted, isAdmin
 FROM Users
 GROUP BY deleted, isAdmin
 
+SELECT count(*) as 'Nº Filas',deleted, isAdmin,email 
+FROM Users
+WHERE hiddenId > 168 AND firstName LIKE '%e%'
+GROUP BY deleted, isAdmin,email
+ORDER BY email desc
