@@ -9,7 +9,7 @@ namespace Database
         static void Main(string[] args)
         {
             Console.WriteLine("Conectando a la base de datos");
-            Db database = new Db();
+            
             Db.Conectar();
 
             if (Db.EstaLaConexionAbierta())
@@ -62,7 +62,6 @@ namespace Database
                 });
             }
             Db.Desconectar();
-
             Console.ReadKey();
         }
 

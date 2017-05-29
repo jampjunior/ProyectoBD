@@ -6,11 +6,11 @@ using System.Data.SqlClient;
 
 namespace Database
 {
-    public class Db
+    public static class Db
     {
         private static SqlConnection conexion = null;
 
-        public void Conectar()
+        public static void Conectar()
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Database
             }
         }
 
-        public bool EstaLaConexionAbierta()
+        public static bool EstaLaConexionAbierta()
         {
             return conexion.State == ConnectionState.Open;
         }
