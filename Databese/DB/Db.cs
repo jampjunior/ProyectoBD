@@ -16,7 +16,7 @@ namespace Database
             {
                 // PREPARO LA CADENA DE CONEXIÓN A LA BD
                 string cadenaConexion = @"Server=.\sqlexpress;
-                                          Database=testdb;
+                                          Database= Carrental;
                                           User Id=testeruser;
                                           Password=!Curso@2017;";
 
@@ -24,7 +24,7 @@ namespace Database
                 conexion = new SqlConnection();
                 conexion.ConnectionString = cadenaConexion;
 
-                // TRATO DE ABRIR LA CONEXION
+                // TRATO DE ABRIR LA CONEXION testdb
                 conexion.Open();
 
                 //// PREGUNTO POR EL ESTADO DE LA CONEXIÓN
@@ -114,79 +114,105 @@ namespace Database
             return usuarios;
         }
 
-
-        public static void intercambioUsuario(Usuario usuario)// nombre que se le pone a elegir para ponerlo luego abajo
+        public static List<MarcasNCoches> DameListaMarcaNCoches()
         {
-            // PREPARO LA CONSULTA SQL PARA INSERTAR AL NUEVO USUARIO
-            string consultaSQL = @"INSERT INTO Users (
-                                                email
-                                               ,password
-                                               ,firstName
-                                               ,lastName
-                                               ,photoUrl
-                                               ,searchPreferences
-                                               ,status
-                                               ,deleted
-                                               ,isAdmin
-                                               )
-                                         VALUES (";
-            consultaSQL += "'" + usuario.email + "'";
-            consultaSQL += ",'" + usuario.password + "'";
-            consultaSQL += ",'" + usuario.firstName + "'";
-            consultaSQL += ",'" + usuario.lastName + "'";
-            consultaSQL += ",'" + usuario.photoUrl + "'";
-            consultaSQL += ",'" + usuario.searchPreferences + "'";
-            consultaSQL += "," + (usuario.status ? "1" : "0");
-            //esto es igual que el status
-            //if (usuario.status)
-            //{
-            //    consultaSQL += ",0";
-            //}
-            consultaSQL += "," + (usuario.deleted ? "1" : "0"); //primer pedazo se concantena con lo que venga detrás un 0 o un 1.
-            consultaSQL += "," + (usuario.isAdmin ? "1" : "0");
-            consultaSQL += ");";
 
+            List<MarcasNCoches> resultados = new List<MarcasNCoches>(); //si fuera sin<> seria para un objeto con <> para varios usos de la listas
+            // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
+            string consultaSQL = "SELECT * FROM V_N_Coches_POR_Marcas";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
             // RECOJO LOS DATOS
-            comando.ExecuteNonQuery();
+            SqlDataReader reader = comando.ExecuteReader();
+            resultados = new List<MarcasNCoches>();
+
+            while (reader.Read())
+            {
+                resultados.Add(new MarcasNCoches()
+                {
+                   marca = reader["Marca"].ToString(),
+                  nCoches= (int)reader["nCoches"]
+                });
+            }
+            return resultados;
+                 }
         }
+
+
+
+
+        //public static void intercambioUsuario(Usuario usuario)// nombre que se le pone a elegir para ponerlo luego abajo
+        //{
+        //    // PREPARO LA CONSULTA SQL PARA INSERTAR AL NUEVO USUARIO
+        //    string consultaSQL = @"INSERT INTO Users (
+        //                                        email
+        //                                       ,password
+        //                                       ,firstName
+        //                                       ,lastName
+        //                                       ,photoUrl
+        //                                       ,searchPreferences
+        //                                       ,status
+        //                                       ,deleted
+        //                                       ,isAdmin
+        //                                       )
+        //                                 VALUES (";
+        //    consultaSQL += "'" + usuario.email + "'";
+        //    consultaSQL += ",'" + usuario.password + "'";
+        //    consultaSQL += ",'" + usuario.firstName + "'";
+        //    consultaSQL += ",'" + usuario.lastName + "'";
+        //    consultaSQL += ",'" + usuario.photoUrl + "'";
+        //    consultaSQL += ",'" + usuario.searchPreferences + "'";
+        //    consultaSQL += "," + (usuario.status ? "1" : "0");
+        //    //esto es igual que el status
+        //    //if (usuario.status)
+        //    //{
+        //    //    consultaSQL += ",0";
+        //    //}
+        //    consultaSQL += "," + (usuario.deleted ? "1" : "0"); //primer pedazo se concantena con lo que venga detrás un 0 o un 1.
+        //    consultaSQL += "," + (usuario.isAdmin ? "1" : "0");
+        //    consultaSQL += ");";
+
+        //    // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
+        //    SqlCommand comando = new SqlCommand(consultaSQL, conexion); 
+        //    // RECOJO LOS DATOS
+        //    comando.ExecuteNonQuery();
+        //}
 
        
-        public static void EliminarUsuario (string email){
+        //public static void EliminarUsuario (string email){
 
         
-            string consultaSQL = @"DELETE FROM Users WHERE email ='" + email + "';"; //pasa el identificador que se quiera borrar
+        //    string consultaSQL = @"DELETE FROM Users WHERE email ='" + email + "';"; //pasa el identificador que se quiera borrar
 
-            // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
-            SqlCommand comando = new SqlCommand(consultaSQL, conexion);
-            // RECOJO LOS DATOS
-            comando.ExecuteNonQuery();
+        //    // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
+        //    SqlCommand comando = new SqlCommand(consultaSQL, conexion);
+        //    // RECOJO LOS DATOS
+        //    comando.ExecuteNonQuery();
 
-        }
+        //} //fallo porque no esta en la bd conectada
 
-        public static void Actualizar(Usuario usuario) {
-            string consultaSQL= @"UPDATE Users";
+        //public static void Actualizar(Usuario usuario) {
+        //    string consultaSQL= @"UPDATE Users";
    
              
-            consultaSQL += " SET password = '" + usuario.password +"'";
-            consultaSQL += " , firstName =  '" + usuario.firstName + "'";
-            consultaSQL += " , lastName ='" + usuario.lastName + "'";
-            consultaSQL += " , photoUrl ='" + usuario.photoUrl + "'";
-            consultaSQL += " , searchPreferences ='" + usuario.searchPreferences + "'";
-            consultaSQL += " , status = " + (usuario.status ? "1" : "0");
-            consultaSQL += " , deleted = " + (usuario.deleted ? "1" : "0");
-            consultaSQL += " , isAdmin = " + (usuario.isAdmin ? "1" : "0");
-            consultaSQL += " WHERE email= '" + usuario.email + "';";
+        //    consultaSQL += " SET password = '" + usuario.password +"'";
+        //    consultaSQL += " , firstName =  '" + usuario.firstName + "'";
+        //    consultaSQL += " , lastName ='" + usuario.lastName + "'";
+        //    consultaSQL += " , photoUrl ='" + usuario.photoUrl + "'";
+        //    consultaSQL += " , searchPreferences ='" + usuario.searchPreferences + "'";
+        //    consultaSQL += " , status = " + (usuario.status ? "1" : "0");
+        //    consultaSQL += " , deleted = " + (usuario.deleted ? "1" : "0");
+        //    consultaSQL += " , isAdmin = " + (usuario.isAdmin ? "1" : "0");
+        //    consultaSQL += " WHERE email= '" + usuario.email + "';";
 
-            SqlCommand comando = new SqlCommand(consultaSQL, conexion);
-            // RECOJO LOS DATOS
-            comando.ExecuteNonQuery();
-
-
-        }
+        //    SqlCommand comando = new SqlCommand(consultaSQL, conexion);
+        //    // RECOJO LOS DATOS
+        //    comando.ExecuteNonQuery();
 
 
+        //}
+
+      
 
 
     }//final db
