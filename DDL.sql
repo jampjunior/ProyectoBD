@@ -1,6 +1,5 @@
 USE carrental
 GO
-
 -- CREACION DE LA TABLA MARCAS
 
 CREATE TABLE [dbo].[Marcas](
