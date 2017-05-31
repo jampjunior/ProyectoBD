@@ -64,3 +64,21 @@ FROM Users
 WHERE hiddenId > 168 AND firstName LIKE '%e%'
 GROUP BY deleted, isAdmin,email
 ORDER BY email desc
+
+--  CONSULTAS SOBRE VARIAS TABLAS
+SELECT 
+	  S.id, S.name, S.description, COUNT(*)
+FROM Services S
+	INNER JOIN ServiceImages SI
+		on S.id = SI.idService
+GROUP BY 	  
+	  S.id, S.name, S.description
+
+SELECT 
+	  S.id, S.name, S.description, SI.imageUrl
+FROM Services S
+	LEFT JOIN ServiceImages SI
+		on S.id = SI.idService
+GROUP BY 	  
+	  S.id, S.name, S.description, SI.imageUrl
+HAVING SI.imageUrl LIKE '%_2.png'
