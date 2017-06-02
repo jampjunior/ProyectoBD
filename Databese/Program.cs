@@ -22,16 +22,35 @@ namespace Database
                 //            );
                 //});
 
-                List<Coche> listaCoches = Db.DameListaCochesConProcedimientoAlmacenado();
+                //List<Coche> listaCoches = Db.DameListaCochesConProcedimientoAlmacenado();
+                //listaCoches.ForEach(coche =>
+                //{
+                //    Console.WriteLine(
+                //        @"Matrícula: " + coche.matricula +
+                //        " Marca: " + coche.marca.denominacion
+
+                //        );
+                //});
+
+
+
+                List<Coche> listaCoches = Db.EjercicioDos();
                 listaCoches.ForEach(coche =>
                 {
                     Console.WriteLine(
-                        @"Matrícula: " + coche.matricula +
-                        " Marca: " + coche.marca.denominacion
+                       @" Marca: " + coche.marca.denominacion +
+                      " Matrícula: " + coche.matricula +
+                      " Número de plaza " + coche.nPlazas
 
                         );
                 });
+
+
+
+
+
             }
+
             Db.Desconectar();
             Console.ReadKey();
         }
