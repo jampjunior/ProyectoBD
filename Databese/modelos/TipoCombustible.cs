@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    class TiposCombustible
+   public class TiposCombustible
     {
         public long id{ get; set; }
         public string denominacion { get; set; }

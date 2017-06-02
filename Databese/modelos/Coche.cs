@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    class Coche
+    public class Coche
     {
         public long id { get; set; }
-        public string Matricula { get; set; }
-        public string Color { get; set; }
-        public decimal Cilindrada { get; set; }
-        public int NPlazas { get; set; }
+        public string matricula { get; set; }
+        public string color { get; set; }
+        public decimal cilindrada { get; set; }
+        public int nPlazas { get; set; }
         public DateTime fechaMatriculacion { get; set; }
         public Marca marca { get; set; }
-        public TiposCombustible tipoCombustible{ get; set; }
-
+        public TiposCombustible tipoCombustible { get; set; }
     }
 }
