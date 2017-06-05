@@ -15,22 +15,26 @@ namespace ApiRentCar.Controllers
         //    return new string[] { "Hola", "Que tal" };
         //}
 
-        public IEnumerable<Coche> Get()
+      //  public IEnumerable<Coche> Get()
+      public RespuestaAPI Get()
         {
-            IEnumerable<Coche> resultado = new List<Coche>();
+            RespuestaAPI resultado = new RespuestaAPI();
+            List <Coche> data = new List<Coche>(); 
             try
             {
                 Db.Conectar();
                 if (Db.EstaLaConexionAbierta())
                 {
-                    resultado = Db.DameListaCochesConProcedimientoAlmacenado();
+                    data = Db.EjercicioDos();
+                    resultado.Error = "";
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                string a = "";
+                resultado.Error = "Error";
             }
-
+            resultado.TotalElemento = data.Count;
+            resultado.data = data;
             return resultado;
         }
 

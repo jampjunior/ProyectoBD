@@ -166,6 +166,9 @@ namespace ApiRentCar
                 coche.tipoCombustible = new TiposCombustible();
                 coche.tipoCombustible.id = (long)reader["idTiposCombustible"];
                 coche.tipoCombustible.denominacion = reader["denominacionTipoCombustible"].ToString();
+
+
+
                 // AÑADO EL COCHE A LA LISTA DE RESULTADOS
                 resultados.Add(coche);
 
@@ -177,68 +180,23 @@ namespace ApiRentCar
 
 
 
-        //    public static List<Coche> EjercicioDos()
-        //    { //Solo va a mostrar lo que se le pide en la bd
-        //        List<Coche> resultados = new List<Coche>();
-
-        //        // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
-        //        string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA";
-
-        //        // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
-        //        SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
-        //        comando.CommandType = CommandType.StoredProcedure;
-        //        // EJECUTO EL COMANDO
-        //        SqlDataReader reader = comando.ExecuteReader();
-        //        // RECORRO EL RESULTADO Y LO PASO A LA VARIABLE A DEVOLVER
-        //        while (reader.Read())
-        //        {
-        //            Coche coche = new Coche();
-        //            coche.matricula = reader["matricula"].ToString();              
-        //            coche.nPlazas = (short)reader["nPlazas"];
-        //            coche.marca = new Marca();
-        //            coche.marca.denominacion = reader["Marca"].ToString();
-
-        //            // AÑADO EL COCHE A LA LISTA DE RESULTADOS
-        //            resultados.Add(coche);
-
-        //        }
-
-        //        return resultados;
-
-
-        //}
-
-
-        public static List<Coche> EjercicioDos(string marca, short nPlazas)
+        public static List<Coche> EjercicioDos()
         { //Solo va a mostrar lo que se le pide en la bd
             List<Coche> resultados = new List<Coche>();
 
             // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
-            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA_2";
+            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA";
 
             // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
             SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
             comando.CommandType = CommandType.StoredProcedure;
-            // PREPARO LOS PARAMETROS Y LES PASO LOS VALORES
-            SqlParameter parametroMarca = new SqlParameter();
-            parametroMarca.ParameterName = "marca";
-            parametroMarca.SqlDbType = SqlDbType.NVarChar;
-            parametroMarca.SqlValue = marca;
-            comando.Parameters.Add(parametroMarca);
-
-            SqlParameter parametroNPlazas = new SqlParameter();
-            parametroNPlazas.ParameterName = "nPlazas";
-            parametroNPlazas.SqlDbType = SqlDbType.SmallInt;
-            parametroNPlazas.SqlValue = nPlazas;
-            comando.Parameters.Add(parametroNPlazas);
-
             // EJECUTO EL COMANDO
             SqlDataReader reader = comando.ExecuteReader();
             // RECORRO EL RESULTADO Y LO PASO A LA VARIABLE A DEVOLVER
             while (reader.Read())
             {
                 Coche coche = new Coche();
-                //coche.matricula = reader["matricula"].ToString();
+                coche.matricula = reader["matricula"].ToString();
                 coche.nPlazas = (short)reader["nPlazas"];
                 coche.marca = new Marca();
                 coche.marca.denominacion = reader["Marca"].ToString();
@@ -254,6 +212,49 @@ namespace ApiRentCar
         }
 
 
+        //public static List<Coche> EjercicioDos(string marca, short nPlazas)
+        //{ //Solo va a mostrar lo que se le pide en la bd
+        //    List<Coche> resultados = new List<Coche>();
+
+        //    // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
+        //    string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA_2";
+
+        //    // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
+        //    SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
+        //    comando.CommandType = CommandType.StoredProcedure;
+        //    // PREPARO LOS PARAMETROS Y LES PASO LOS VALORES
+        //    SqlParameter parametroMarca = new SqlParameter();
+        //    parametroMarca.ParameterName = "marca";
+        //    parametroMarca.SqlDbType = SqlDbType.NVarChar;
+        //    parametroMarca.SqlValue = marca;
+        //    comando.Parameters.Add(parametroMarca);
+
+        //    SqlParameter parametroNPlazas = new SqlParameter();
+        //    parametroNPlazas.ParameterName = "nPlazas";
+        //    parametroNPlazas.SqlDbType = SqlDbType.SmallInt;
+        //    parametroNPlazas.SqlValue = nPlazas;
+        //    comando.Parameters.Add(parametroNPlazas);
+
+        //    // EJECUTO EL COMANDO
+        //    SqlDataReader reader = comando.ExecuteReader();
+        //    // RECORRO EL RESULTADO Y LO PASO A LA VARIABLE A DEVOLVER
+        //    while (reader.Read())
+        //    {
+        //        Coche coche = new Coche();
+        //        //coche.matricula = reader["matricula"].ToString();
+        //        coche.nPlazas = (short)reader["nPlazas"];
+        //        coche.marca = new Marca();
+        //        coche.marca.denominacion = reader["Marca"].ToString();
+
+        //        // AÑADO EL COCHE A LA LISTA DE RESULTADOS
+        //        resultados.Add(coche);
+
+        //    }
+
+        //    return resultados;
+
+
+        //}
 
 
         public static void InsertarUsuario(Usuario usuario)
