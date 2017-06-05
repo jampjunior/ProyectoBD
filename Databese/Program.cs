@@ -34,7 +34,7 @@ namespace Database
 
 
 
-                List<Coche> listaCoches = Db.EjercicioDos();
+                List<Coche> listaCoches = Db.EjercicioDos("toyota", 2);
                 listaCoches.ForEach(coche =>
                 {
                     Console.WriteLine(
