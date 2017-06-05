@@ -26,9 +26,9 @@ namespace ApiRentCar.Controllers
                     resultado = Db.DameListaCochesConProcedimientoAlmacenado();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-       
+                string a = "";
             }
 
             return resultado;
