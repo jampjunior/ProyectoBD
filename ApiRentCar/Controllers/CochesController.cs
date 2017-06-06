@@ -41,9 +41,27 @@ namespace ApiRentCar.Controllers
 
 
         // GET: api/Coches/5
-        public string Get(int id)
+        public RespuestaAPI Get(long id)
         {
-            return "value";
+            RespuestaAPI resultado = new RespuestaAPI();
+            List<Coche> data = new List<Coche>();
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    data = Db.DameListaCochesConProcedimientoAlmacenadoId(id);
+                    resultado.Error = "";
+                }
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+                resultado.Error = "Error";
+            }
+            resultado.TotalElemento = data.Count;
+            resultado.data = data;
+            return resultado;
         }
 
         // POST: api/Coches

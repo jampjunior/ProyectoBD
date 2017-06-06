@@ -43,3 +43,11 @@ ORDER BY nPlazas
 
 END
 --para ver los resultados cambiados le ejecutamos otra vez.
+--PROCEDIMIENTO PARA LISTAS DE MARCAS
+ALTER PROCEDURE GetMarcas
+AS
+BEGIN
+select
+id, denominacion 
+FROM Marcas
+END
