@@ -44,27 +44,31 @@ namespace ApiRentCar.Controllers
         public RespuestaAPI Get(int id)
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            List<Marca> dataMarca = new List<Marca>();
+            List<Marca> listaMarca = new List<Marca>();
             try
             {
                 Db.Conectar();
+
                 if (Db.EstaLaConexionAbierta())
                 {
-                    dataMarca = Db.DameListaCochesConMarcaId(id); // fallo
-                    resultado.TotalElemento = dataMarca.Count;
+                    listaMarca = Db.GetMarcasPorId(id);
+                    //dataMarca = Db.GetMarcasPorId( id); // fallo
+                    //resultado.TotalElemento = dataMarca.Count;
+                    resultado.Error = "";
+                    Db.Desconectar();
                 }
-                Db.Desconectar();
+               
 
             }
             catch (Exception)
             {
-                resultado.TotalElemento = 0;
+                
                 resultado.Error = "Se produjo un error";
 
             }
 
-            resultado.TotalElemento = dataMarca.Count;
-            resultado.dataMarca = dataMarca;
+            resultado.TotalElemento = listaMarca.Count;
+            resultado.dataMarca = listaMarca;
             return resultado;
         }
 
