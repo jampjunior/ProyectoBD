@@ -25,7 +25,7 @@ namespace ApiRentCar.Controllers
                 Db.Conectar();
                 if (Db.EstaLaConexionAbierta())
                 {
-                    data = Db.EjercicioDos();
+                    data = Db.DameListaCochesConProcedimientoAlmacenado();
                     resultado.Error = "";
                 }
             }

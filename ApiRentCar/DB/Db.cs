@@ -142,7 +142,7 @@ namespace ApiRentCar
             List<Coche> resultados = new List<Coche>();
 
             // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
-            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA";
+            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA_7";
 
             // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
             SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
@@ -271,7 +271,7 @@ namespace ApiRentCar
             List<Coche> resultados = new List<Coche>();
 
             // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
-            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA";
+            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA"; //si quito el 8 es el mio
 
             // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
             SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
@@ -486,7 +486,7 @@ namespace ApiRentCar
         }
 
 
-
+        
 
 
 
