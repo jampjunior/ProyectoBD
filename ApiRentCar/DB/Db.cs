@@ -222,7 +222,7 @@ namespace ApiRentCar
             return resultados;
         }
 
-        public static List<Coche> DameListaCochesConMarcaId(long id)
+        public static List<Marca> DameListaCochesConMarcaId(long id)
         {
             // CREO EL OBJETO EN EL QUE SE DEVOLVERÁN LOS RESULTADOS
             List<Coche> resultados = new List<Coche>();
