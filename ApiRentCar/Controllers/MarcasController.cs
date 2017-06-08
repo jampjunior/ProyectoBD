@@ -76,8 +76,28 @@ namespace ApiRentCar.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]Marca marca)
         {
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.Error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.AgregarMarca(marca);
+
+                }
+                respuesta.TotalElemento = filasAfectadas;
+                    Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.TotalElemento = 0;
+                respuesta.Error = "Petardaso te salió men";
+            }
             
-            return Ok(marca);
+            return Ok(respuesta);
 
         }
 

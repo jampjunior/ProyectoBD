@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     //console.log("ese que pasooooo");
 
-    
-         //PREPARAR LLAMADA API
-           
+    function GetMarcas() {
+        //PREPARAR LLAMADA API
+
         var urlApi = 'http://localhost:51093/api/Marcas';
-        
+
         $.get(urlApi, function (respuesta, estado) {
 
             if (estado === 'success') {
@@ -34,6 +34,9 @@
 
 
         });
+
+    }
+        
   
 
         $('#btnAddMarca').click(function () {
@@ -51,12 +54,17 @@
                 type: "POST",
                 dataType: 'json',
                 data: dataNuevaMarca,
-                success: function (data) {
-                  // debugger;
-                    console.log(data);
+                success: function (respuesta) {
+                    //debugger;
+                    console.log(respuesta);
+                    GetMarcas();
+                },
+                error: function (respuesta) {
+                    console.log(respuesta);
                 }
             });
         });
 
+    GetMarcas();
 
 });
