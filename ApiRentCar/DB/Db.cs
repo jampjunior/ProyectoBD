@@ -501,10 +501,24 @@ namespace ApiRentCar
 
             return filasAfectadas;
         }
-        
 
 
 
+        public static int AgregarCombustible(TiposCombustible dataTipoCombustible)
+        {
+            string procedimiento = "dbo.AgregarCombustible";
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure; //lo que te voy a pasar no es un select y es un PA
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "denominacion";
+            parametro.SqlDbType = SqlDbType.NVarChar;
+            parametro.SqlValue = dataTipoCombustible.denominacion; //donde quiero meter los parámetros
+            comando.Parameters.Add(parametro);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+
+            return filasAfectadas;
+        }
 
 
 

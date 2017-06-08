@@ -53,9 +53,17 @@ FROM Marcas
 END
 --PROCEDIMIENTO PARA INSERTAR UNA NUEVA MARCA
 
-CREATE PROCEDURE AgregarMarca
+AlTER PROCEDURE AgregarMarca
  @denominacion nvarchar(50)
 AS
 BEGIN
 INSERT INTO Marcas(denominacion) VALUES(@denominacion)
+END
+
+--PROCEDIMIENTO PARA INSERTAR UN NUEVO COMBUSTIBLE
+CREATE PROCEDURE AgregarCombustible
+ @denominacion nvarchar(50)
+AS
+BEGIN
+INSERT INTO TiposCombustibles(denominacion) VALUES(@denominacion)
 END

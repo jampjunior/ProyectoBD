@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="views\addTipoCombustible.html" />
     <Content Include="views\combustibles.html" />
     <Content Include="views\coches.html" />
     <Content Include="views\css\estilos.css" />
