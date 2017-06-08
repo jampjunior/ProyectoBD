@@ -73,8 +73,12 @@ namespace ApiRentCar.Controllers
         }
 
         // POST: api/Marcas
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]Marca marca)
         {
+            
+            return Ok(marca);
+
         }
 
         // PUT: api/Marcas/5
