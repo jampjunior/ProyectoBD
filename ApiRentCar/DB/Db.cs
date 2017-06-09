@@ -184,7 +184,7 @@ namespace ApiRentCar
             List<Coche> resultados = new List<Coche>();
 
             // PREPARO LA LLAMADA AL PROCEDIMIENTO ALMACENADO
-            string procedimientoAEjecutar = "dbo.GET_COCHE_POR_MARCA_ID";
+            string procedimientoAEjecutar = "dbo.GetMarcas";
 
             // PREPARAMOS EL COMANDO PARA EJECUTAR EL PROCEDIMIENTO ALMACENADO
             SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
@@ -434,7 +434,7 @@ namespace ApiRentCar
             List<Marca> resultado = new List<Marca>();
 
             // PREPARO EL PROCEDIMIENTO A EJECUTAR
-            string procedimiento = "dbo.GetMarcasPorId";
+            string procedimiento = "dbo.GetMarcas";
             // PREPARO EL COMANDO PARA LA BD
             SqlCommand comando = new SqlCommand(procedimiento, conexion);
             // INDICO QUE LO QUE VOY A EJECUTAR ES UN PA
@@ -521,9 +521,62 @@ namespace ApiRentCar
         }
 
 
+        public static int EliminarMarca(long id)
+        {
+            string procedimiento = "dbo. EliminarMarca";
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure; //lo que te voy a pasar no es un select y es un PA
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "id";
+            parametro.SqlDbType = SqlDbType.BigInt;
+            parametro.SqlValue = id; //donde quiero meter los parámetros
+
+            comando.Parameters.Add(parametro);
+            int filasAfectadas = comando.ExecuteNonQuery();
+            return filasAfectadas;
+        }
+
+        public static int ActualizarMarcas(long id, Marca marca)
+        {
+            string procedimiento = "dbo. ActualizarMarca";
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+            comando.CommandType = CommandType.StoredProcedure; //lo que te voy a pasar no es un select y es un PA
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "id";
+            parametro.SqlDbType = SqlDbType.BigInt;
+            parametro.SqlValue = marca.id; //donde quiero meter los parámetros  
+            comando.Parameters.Add(parametro);
+            //poner dos parámetros
+            SqlParameter Denominacion = new SqlParameter();
+            Denominacion.ParameterName = "denominacion";
+            Denominacion.SqlDbType = SqlDbType.NVarChar;
+            Denominacion.SqlValue = marca.denominacion;  
+            comando.Parameters.Add(Denominacion);
+
+
+
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+
+            return filasAfectadas;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     }
+
+
 }
+
 

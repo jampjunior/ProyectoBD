@@ -22,14 +22,15 @@ namespace ApiRentCar.Controllers
                 if (Db.EstaLaConexionAbierta())
                 {
                     dataMarca = Db.GetMarcas();
-                    resultado.TotalElemento = dataMarca.Count;
+
                 }
+                resultado.Error = "";
                 Db.Desconectar();
 
             }
             catch (Exception)
             {
-                resultado.TotalElemento = 0;
+
                 resultado.Error = "Se produjo un error";
 
             }
@@ -57,12 +58,12 @@ namespace ApiRentCar.Controllers
                     resultado.Error = "";
                     Db.Desconectar();
                 }
-               
+
 
             }
             catch (Exception)
             {
-                
+
                 resultado.Error = "Se produjo un error";
 
             }
@@ -88,7 +89,7 @@ namespace ApiRentCar.Controllers
 
                 }
                 respuesta.TotalElemento = filasAfectadas;
-                    Db.Desconectar();
+                Db.Desconectar();
             }
             catch (Exception ex)
             {
@@ -96,19 +97,69 @@ namespace ApiRentCar.Controllers
                 respuesta.TotalElemento = 0;
                 respuesta.Error = "Petardaso te salió men";
             }
-            
+
             return Ok(respuesta);
 
         }
 
         // PUT: api/Marcas/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public IHttpActionResult Put(int id, [FromBody] Marca marca)
         {
+             RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.Error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.ActualizarMarcas(id, marca);
+
+                }
+                respuesta.TotalElemento = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.TotalElemento = 0;
+                respuesta.Error = "error al actualizar la marca";
+            }
+
+            return Ok(respuesta);
+
+
+
         }
 
         // DELETE: api/Marcas/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
+            RespuestaAPI respuesta = new RespuestaAPI();
+            respuesta.Error = "";
+            int filasAfectadas = 0;
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    filasAfectadas = Db.EliminarMarca(id);
+
+                }
+                respuesta.TotalElemento = filasAfectadas;
+                Db.Desconectar();
+            }
+            catch (Exception ex)
+            {
+
+                respuesta.TotalElemento = 0;
+                respuesta.Error = "Petardaso te salió men";
+            }
+
+            return Ok(respuesta);
         }
     }
+
 }

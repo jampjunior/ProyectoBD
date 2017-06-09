@@ -83,6 +83,9 @@ namespace ApiRentCar.Controllers
         // PUT: api/TiposCombustible/5
         public void Put(int id, [FromBody]string value)
         {
+
+
+
         }
 
         // DELETE: api/TiposCombustible/5
