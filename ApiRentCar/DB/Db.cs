@@ -15,10 +15,14 @@ namespace ApiRentCar
             try
             {
                 // PREPARO LA CADENA DE CONEXIÓN A LA BD
-                string cadenaConexion = @"Server=.\sqlexpress;
-                                          Database=carrental;
-                                          User Id=testeruser;
-                                          Password=!Curso@2017;";
+                string cadenaConexion = @"Server=borjacurso.database.windows.net;
+                                          Database=borjaPueba;
+                                          User Id=borja;
+                                          Password=CursoBorj@17;";
+                //string cadenaConexion = @"Server=.\sqlexpress;
+                //                          Database=carrental;
+                //                          User Id=testeruser;
+                //                          Password=!Curso@2017;";
 
                 // CREO LA CONEXIÓN
                 conexion = new SqlConnection();
